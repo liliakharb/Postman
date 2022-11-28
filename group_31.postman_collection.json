@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "d808bece-c10e-49e1-8b07-f5911cc9d43f",
+		"name": "group_31",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23583630"
+	},
+	"item": [
+		{
+			"name": "/first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"This is the first responce from server!ss\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/first",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let req = request.data\r",
+							"\r",
+							"var polzowatel = pm.response.json()\r",
+							"\r",
+							"pm.test(\"name request equals Lira\", function () {\r",
+							"    pm.expect(polzowatel.name).to.eql(\"Lira\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"age request equal 26\", function () {\r",
+							"    pm.expect(polzowatel.age).to.eql(\"26\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"salary request equal 1500\", function () {\r",
+							"    pm.expect(polzowatel.salary).to.eql(1500);\r",
+							"});\r",
+							"\r",
+							"let req_name = req.name\r",
+							"\r",
+							"pm.test(\"name request equals response\", function () {\r",
+							"     pm.expect(polzowatel.name).to.eql(req_name);\r",
+							"});\r",
+							"\r",
+							"var req_age = req.age\r",
+							"\r",
+							"pm.test(\"age request equal response\", function () {\r",
+							"    pm.expect(polzowatel.age).to.eql(req_age);\r",
+							"});\r",
+							"\r",
+							"var req_salary = +req.salary \r",
+							"\r",
+							"pm.test(\"salary request equal response\", function () {\r",
+							"    pm.expect(polzowatel.salary).to.eql(req_salary);\r",
+							"});\r",
+							"\r",
+							"req_family = req.family\r",
+							"\r",
+							"console.log (\"family:\", polzowatel.family)\r",
+							"\r",
+							"let req_salary_1_5 = req_salary * 4\r",
+							"\r",
+							"pm.test(\"u_salary_1_5_year request equal response\", function () {\r",
+							"    pm.expect(polzowatel.family.u_salary_1_5_year).to.eql(req_salary_1_5);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Lira",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "26",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/object_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var res_object_3 = pm.response.json();\r",
+							"\r",
+							"const requestData = pm.request.url.query.toObject()\r",
+							"\r",
+							"pm.test(\"name response = request \", function () {\r",
+							"    pm.expect(res_object_3.name).to.eql(requestData.name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"age response = request \", function () {\r",
+							"    pm.expect(res_object_3.age).to.eql(requestData.age);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"salary response = request \", function () {\r",
+							"    pm.expect(res_object_3.salary).to.eql(+requestData.salary);\r",
+							"});\r",
+							"\r",
+							"console.log (res_object_3.family)\r",
+							"\r",
+							"pm.test(\"Test dog has parameter name\", () => {\r",
+							"    pm.expect(res_object_3.family.pets.dog).to.have.property(\"name\");\r",
+							"    pm.expect(res_object_3.family.pets.dog).to.have.property(\"age\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"dog parameter value check\", function () {\r",
+							"    pm.expect(res_object_3.family.pets.dog.name).to.eql(\"Luky\");\r",
+							"    pm.expect(res_object_3.family.pets.dog.age).to.eql(4);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_3?name=Ania&age=45&salary=2000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ania"
+						},
+						{
+							"key": "age",
+							"value": "45"
+						},
+						{
+							"key": "salary",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var res_object_info_4 = pm.response.json();\r",
+							"\r",
+							"var req_object_info_4 = pm.request.url.query.toObject()\r",
+							"\r",
+							"pm.test(\"name raquest = response\", function () {\r",
+							"    \r",
+							"    pm.expect(res_object_info_4.name).to.eql(req_object_info_4.name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"age raquest = response\", function () {\r",
+							"    \r",
+							"    pm.expect(res_object_info_4.age).to.eql(+req_object_info_4.age);\r",
+							"});\r",
+							"\r",
+							"console.log (req_object_info_4.salary)\r",
+							"console.log (res_object_info_4.salary)\r",
+							"\r",
+							"console.log (\"0 param =\" + res_object_info_4.salary[0])\r",
+							"console.log (\"1 param =\" + res_object_info_4.salary[1])\r",
+							"console.log (\"2 param =\" + res_object_info_4.salary[2])\r",
+							"\r",
+							"pm.test(\"0 param selery = salary from request\", function () {\r",
+							"    \r",
+							"    pm.expect(res_object_info_4.salary[0]).to.eql(+req_object_info_4.salary);\r",
+							"});\r",
+							"\r",
+							"var salary_2 = req_object_info_4.salary * 2\r",
+							"var str_salary_2 = String(salary_2)\r",
+							"var salary_3 = req_object_info_4.salary * 3\r",
+							"var str_salary_3 = String(salary_3)\r",
+							"\r",
+							"pm.test(\"1 param selery = salary from request * 2\", function () {\r",
+							"    pm.expect(res_object_info_4.salary[1]).to.eql(str_salary_2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"2 param selery = salary from request * 3\", function () {\r",
+							"    pm.expect(res_object_info_4.salary[2]).to.eql(str_salary_3);\r",
+							"});\r",
+							"\r",
+							"var respon_name = res_object_info_4.name \r",
+							"var respon_age = res_object_info_4.age\r",
+							"var respon_salary = res_object_info_4.salary\r",
+							"\r",
+							"pm.environment.set(\"name\", respon_name);\r",
+							"pm.environment.set(\"age\", res_object_info_4.age);\r",
+							"pm.environment.set(\"salary\", res_object_info_4.salary);\r",
+							"\r",
+							"let i=0;\r",
+							"while (i<3) {\r",
+							"    console.log(res_object_info_4.salary[i]);\r",
+							"    i++\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/object_info_4?name=Marta&age=36&salary=1200",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Marta"
+						},
+						{
+							"key": "age",
+							"value": "36"
+						},
+						{
+							"key": "salary",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
